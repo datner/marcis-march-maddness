@@ -1,0 +1,46 @@
+diff --git a/internal_effect_untraced/fiberScope.js b/internal_effect_untraced/fiberScope.js
+index e34f1047625ff0c836ef885a0fea7fae44cbae8e..b155c52ab75cf611173112957d7af4182c954e7a 100644
+--- a/internal_effect_untraced/fiberScope.js
++++ b/internal_effect_untraced/fiberScope.js
+@@ -30,7 +30,9 @@ class Global {
+     if (typeof globalThis[globalFiberScopeURI] === "undefined") {
+       globalThis[globalFiberScopeURI] = this;
+     } else {
+-      throw new Error("Bug: FiberScope.Global initialized twice (maybe coming from a duplicated module)");
++      // consequenses will never be the same
++      return globalThis[globalFiberScopeURI]
++      // throw new Error("Bug: FiberScope.Global initialized twice (maybe coming from a duplicated module)");
+     }
+   }
+ }
+diff --git a/mjs/internal_effect_untraced/fiberScope.mjs b/mjs/internal_effect_untraced/fiberScope.mjs
+index 096abce25bf66a87330f749165405f01b0da5118..5a10df274cc1b6a829299920502823e4eef39be7 100644
+--- a/mjs/internal_effect_untraced/fiberScope.mjs
++++ b/mjs/internal_effect_untraced/fiberScope.mjs
+@@ -21,7 +21,9 @@ class Global {
+     if (typeof globalThis[globalFiberScopeURI] === "undefined") {
+       globalThis[globalFiberScopeURI] = this;
+     } else {
+-      throw new Error("Bug: FiberScope.Global initialized twice (maybe coming from a duplicated module)");
++      // consequensese will never be the same
++      return globalThis[globalFiberScopeURI]
++      // throw new Error("Bug: FiberScope.Global initialized twice (maybe coming from a duplicated module)");
+     }
+   }
+ }
+diff --git a/package.json b/package.json
+index 7906a662fe2809695ff6f5d7e09e3960194bbfcc..d2f61e8035e2bde57e37c75fda471691ec309d18 100644
+--- a/package.json
++++ b/package.json
+@@ -12,7 +12,10 @@
+   "publishConfig": {
+     "access": "public"
+   },
+-  "sideEffects": [],
++  "sideEffects": [
++    "./internal_effect_untraced/fiberScope.js",
++    "./mjs/internal_effect_untraced/fiberScope.mjs"
++  ],
+   "exports": {
+     "./*": {
+       "import": {
