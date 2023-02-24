@@ -26,10 +26,10 @@ const reducer: Reducer<Picks, Action> = (state, [idx, id]) =>
 export function TeamBlock(props: Props) {
   const { playerPool: players, title } = props;
   const [picked, update] = useReducer(reducer, [
-    O.some(players[0].id),
-    O.some(players[1].id),
-    O.some(players[2].id),
-    O.some(players[3].id),
+    O.none(),
+    O.none(),
+    O.none(),
+    O.none(),
   ]);
   const changeAt = (idx: number) => (player: string) => update([idx, player]);
 
