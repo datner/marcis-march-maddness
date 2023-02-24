@@ -2,7 +2,8 @@
 const nextConfig = {
   experimental: {
     appDir: true,
+    serverComponentsExternalPackages: ["@effect/io"],
   },
-}
+};
 
-module.exports = nextConfig
+export default nextConfig;
