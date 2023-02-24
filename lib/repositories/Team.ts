@@ -56,7 +56,11 @@ const GetOwnData = S.struct({
       ppg: S.number,
       team: S.string,
       seed: S.number,
-      scores: S.any,
+      stats: pipe(
+        S.struct({
+          points: pipe(S.number, S.array, S.option),
+        })
+      ),
     })
   ),
 });
@@ -68,7 +72,7 @@ const _getOwn = pipe(
       .select(
         `
             id, name,
-            players (id, name, ppg, team, seed, scores:game_score (*))
+            players (id, name, ppg, team, seed, stats:game_score (points))
             `
       )
       .single()

@@ -4,6 +4,9 @@ const nextConfig = {
     appDir: true,
     serverComponentsExternalPackages: ["@effect/io"],
   },
+  compiler: {
+    removeConsole: true,
+  },
 };
 
 export default nextConfig;

@@ -34,6 +34,23 @@ export interface Database {
   }
   public: {
     Tables: {
+      game_score: {
+        Row: {
+          active: boolean
+          id: string
+          points: number[] | null
+        }
+        Insert: {
+          active?: boolean
+          id: string
+          points?: number[] | null
+        }
+        Update: {
+          active?: boolean
+          id?: string
+          points?: number[] | null
+        }
+      }
       players: {
         Row: {
           created_at: string | null
@@ -88,17 +105,14 @@ export interface Database {
       }
       teams_players: {
         Row: {
-          id: string
           player_id: string
           team_id: string
         }
         Insert: {
-          id?: string
           player_id: string
           team_id: string
         }
         Update: {
-          id?: string
           player_id?: string
           team_id?: string
         }
